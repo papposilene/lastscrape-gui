@@ -21,7 +21,7 @@ Modified script for generating a .scrobbler.log file: rename created file in ".s
 Usage: lastexport.py -u USER [-o OUTFILE] [-p STARTPAGE] [-s SERVER]
 """
 
-import urllib2, urllib, sys, time, re
+import urllib2, urllib, sys, datetime, time, re
 import xml.etree.ElementTree as ET
 from optparse import OptionParser
 
@@ -136,7 +136,8 @@ def parse_track(trackelement):
 
     trackname = trackelement.find('name').text
     trackmbid = trackelement.find('mbid').text
-    date = str(time.time())
+    #date = str(time.time())
+    date = str(datetime.datetime.now() - datetime.timedelta(seconds=1))
 
     output = [artistname, albumname, trackname, "1", "180", "L", date, trackmbid]
 
